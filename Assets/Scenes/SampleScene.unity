@@ -26258,7 +26258,7 @@ MonoBehaviour:
   dialogBox: {fileID: 1162601923}
   dialogText: {fileID: 1088810947}
   dialog: "\u2191 Lost Lake"
-  dialogActive: 0
+  playerInRange: 0
 --- !u!1001 &1685905813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26602,6 +26602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d31310968add8f24cb8a56ddaa70d6bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
   speed: 4
 --- !u!61 &1823209007
 BoxCollider2D:
