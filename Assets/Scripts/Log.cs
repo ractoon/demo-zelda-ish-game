@@ -13,12 +13,13 @@ public class Log : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        currentState = EnemyState.idle;
         myRidigbody = GetComponent<Rigidbody2D>();
         target = GameObject.FindWithTag("Player").transform;
     }
 
-    // Update is called once per frame
-    void Update()
+    // FixedUpdate is called once per physics event
+    void FixedUpdate()
     {
         CheckDistance();
     }
@@ -27,8 +28,18 @@ public class Log : Enemy
     {
         if (Vector3.Distance(target.position, transform.position) <= chaseRadius 
         && Vector3.Distance(target.position, transform.position) > attackRadius) {
-            Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
-            myRidigbody.MovePosition(temp);
+            if ((currentState == EnemyState.idle || currentState == EnemyState.walk) && currentState != EnemyState.stagger) {
+                Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+                myRidigbody.MovePosition(temp);
+                ChangeState(EnemyState.walk);
+            }
+        }
+    }
+
+    private void ChangeState(EnemyState newState)
+    {
+        if (currentState != newState) {
+            currentState = newState;
         }
     }
 }
